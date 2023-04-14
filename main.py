@@ -14,7 +14,7 @@ def _run_job(match_id: int, client_id: int) -> None:
     job_id = client.submit_job(
         entrypoint="python job1/main.py",
         runtime_env={
-            "working_dir": "https://github.com/vladisa88/playground/archive/b52855631ed5f812ab2bd26e5807308224f1e37a.zip",
+            "working_dir": "https://github.com/vladisa88/playground/archive/refs/heads/master.zip",
             "env_vars": {"MATCH_ID": str(match_id), "CLIENT_ID": str(client_id)}
         },
     )
