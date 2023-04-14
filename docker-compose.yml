@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+    ray_head:
+      image: rayproject/ray:latest-py39
+      command: ["ray", "start", "--head", "--dashboard-host", "0.0.0.0", "--block"]
+      ports:
+        - "10001:10001"
+        - "6379:6379"
+        - "8265:8265"
+      environment:
+        - PYTHON=/usr/bin/python3.9
+      volumes:
+        - ./ray-head:/ray-head
+
+
+    ray_worker:
+      image: rayproject/ray:latest-py39
+      command: ["ray", "start",  "--address=ray_head:6379", "--block"]
+      environment:
+              RAY_HEAD_IP: tasks.ray-head
+    
+    
+
+    nginx:
+      image: nginx
+      container_name: nginx
+      restart: always
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
