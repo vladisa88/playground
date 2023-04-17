@@ -12,7 +12,7 @@ def _run_job(match_id: int, client_id: int) -> None:
     client = JobSubmissionClient("http://localhost:8285")
     print("Submitting job")
     job_id = client.submit_job(
-        entrypoint="rm -rf playground-master.zip && curl -LJO https://github.com/vladisa88/playground/archive/refs/heads/master.zip && ls -a && unzip -q playground-master.zip && ls -a && cd playground-master && ls -a && python src/job1/main.py",
+        entrypoint="rm -rf playground-master.zip && curl -o master.zip -LJO https://github.com/vladisa88/playground/archive/refs/heads/master.zip && ls -a && unzip -oq master.zip && ls -a && cd master && ls -a && python src/job1/main.py",
         runtime_env={
             "working_dir": ".",
             "env_vars": {"MATCH_ID": str(match_id), "CLIENT_ID": str(client_id)}
