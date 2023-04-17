@@ -16,7 +16,7 @@ class Test:
     def main(self) -> None:
         resp = requests.get("https://google.com")
         print("REQUEST STATUS CODE", resp.status_code)
-        print(f"Match ID: {self._match_id}, client ID: {self._client_id}. AAAAA")
+        print(f"Match ID: {self._match_id}, client ID: {self._client_id}. BBBBB")
 
 
 def main(match_id: int, client_id: int) -> None:
